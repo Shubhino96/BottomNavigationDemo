@@ -2,7 +2,7 @@ package com.example.abhi.jsshndemo.activities;
 
 
 import android.annotation.SuppressLint;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
@@ -23,7 +23,7 @@ import android.view.MenuItem;
 
 import com.example.abhi.jsshndemo.R;
 import com.example.abhi.jsshndemo.fragments.ContactFragment;
-import com.example.abhi.jsshndemo.fragments.EventsFragment;
+import com.example.abhi.jsshndemo.fragments.InfoFragment;
 import com.example.abhi.jsshndemo.fragments.HomeFragment;
 import com.example.abhi.jsshndemo.fragments.RegisterFragment;
 import com.example.abhi.jsshndemo.fragments.ScheduleFragment;
@@ -32,7 +32,6 @@ import com.example.abhi.jsshndemo.fragments.TeamFragment;
 import com.example.abhi.jsshndemo.menu.DrawerAdapter;
 import com.example.abhi.jsshndemo.menu.DrawerItem;
 import com.example.abhi.jsshndemo.menu.SimpleItem;
-import com.example.abhi.jsshndemo.menu.SpaceItem;
 import com.yarolegovich.slidingrootnav.SlidingRootNav;
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
 
@@ -88,7 +87,6 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
                 createItemFor(POS_SCHEDULE),
                 createItemFor(POS_CONTACT),
                 createItemFor(POS_SPONSORS),
-                createItemFor(POS_TEAM),
                 //new SpaceItem(48),
                 createItemFor(POS_EXIT)));
         adapter.setListener((DrawerAdapter.OnItemSelectedListener) this);
@@ -119,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
                 Log.v(TAG,"Home Fragment Selected");
                 break;
             case POS_EVENTS:
-                nselectedFragment=EventsFragment.newInstance();
+                nselectedFragment= InfoFragment.newInstance();
                 Log.v(TAG,"Event Fragment Selected");
                 break;
             case POS_SCHEDULE:
@@ -133,10 +131,6 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
             case POS_SPONSORS:
                 nselectedFragment= SponsorsFragment.newInstance();
                 Log.v(TAG,"Sponsors Fragment Selected");
-                break;
-            case POS_TEAM:
-                nselectedFragment = TeamFragment.newInstance();
-                Log.v(TAG,"Team Fragment Selected");
                 break;
 
         }
@@ -152,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
         //Fragment current= getFragmentManager().findFragmentById(R.id.frame_layout);
         if(POS_CURRENT!=position){
         POS_CURRENT=position;
-        getFragmentManager().beginTransaction()
+        getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frame_layout, fragment)
                 .commit();
         }
@@ -209,7 +203,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
                         break;
                     case R.id.events:
                         position=1;
-                        selectedFragment=EventsFragment.newInstance();
+                        selectedFragment= InfoFragment.newInstance();
                         Log.v(TAG,"Event Fragment Selected");
                         break;
                     case R.id.schedule:
